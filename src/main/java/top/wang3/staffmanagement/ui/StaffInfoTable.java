@@ -1,7 +1,4 @@
 package top.wang3.staffmanagement.ui;
-
-
-
 import top.wang3.staffmanagement.model.Constants;
 import top.wang3.staffmanagement.model.Staff;
 import top.wang3.staffmanagement.service.StaffService;
@@ -234,6 +231,7 @@ public class StaffInfoTable extends JFrame {
     @SuppressWarnings({"unchecked"})
     private void handleSearch() {
         if (this.staffTable.getModel().getRowCount() <= 0) {
+            //no data, return
             return;
         }
         String type = (String) this.searchType.getSelectedItem();
@@ -248,9 +246,11 @@ public class StaffInfoTable extends JFrame {
                 }
                 try {
                     StaffInfoTableModel model = (StaffInfoTableModel) entry.getModel();
-                    //
+                    //获取编号或姓名列的索引
                     int index = model.getHeaderIndex(t);
-                    //change to full match
+                    //full match
+                    //比较编号或者姓名这一列单元格的内容是否匹配condition(输入的编号姓名);
+                    //entry内部维护了行的的索引，传入列索引获取对应单元格的值
                     return entry.getStringValue(index).equals(condition);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -296,34 +296,34 @@ public class StaffInfoTable extends JFrame {
                 ArrayList<Integer> ids = new ArrayList<>();
                 int size = rows.length;
                 for (int i = 0; i < size; i++) {
+                    //由于表格可以排序
+                    //需要获取选中行的索引实际在TableModel中的索引
                     rows[i] = this.staffTable.convertRowIndexToModel(rows[i]);
                     ids.add((int) this.staffInfo.get(rows[i]).get(0));
                 }
+                //异步删除
                 CompletableFuture.runAsync(() -> this.staffService.deleteStaffByIds(ids));
-                System.out.println(this.staffInfo);
-                CompletableFuture.runAsync(() -> {
-                    Arrays.sort(rows);
-                    StaffInfoTableModel model = (StaffInfoTableModel) this.staffTable.getModel();
-                    for (int i = size - 1; i >= 0; i--) {
-                        model.removeRow(rows[i]);
-                    }
-                    this.searchText.setText("");
-                }).thenRun(() -> {
-                    JOptionPane.showMessageDialog(this, "删除成功", "提示",
-                            JOptionPane.INFORMATION_MESSAGE);
-                });
+                //排序要删除行的索引
+                Arrays.sort(rows);
+                StaffInfoTableModel model = (StaffInfoTableModel) this.staffTable.getModel();
+                for (int i = size - 1; i >= 0; i--) {
+                    //从后往前删除，防止索引越界
+                    model.removeRow(rows[i]);
+                }
+                this.searchText.setText("");
+                JOptionPane.showMessageDialog(this, "删除成功", "提示",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
 
     public void refreshModel() {
+        //refresh table data
         this.staffInfo = getAllStaff();
         TableModel newModel = new StaffInfoTableModel(this.staffInfo, TABLE_COLUMNS);
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(newModel);
         staffTable.setModel(newModel);
         staffTable.setRowSorter(sorter);
-//        staffTable.getSelectionModel().addListSelectionListener((e) -> this.handleSelect());
-        //头部
         JTableHeader header = staffTable.getTableHeader();
         header.setFont(DEFAULT_FONT);
         header.setPreferredSize(new Dimension(header.getWidth(), 36));

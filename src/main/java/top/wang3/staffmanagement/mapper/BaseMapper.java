@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 实体类和数据库表映射简单实现，并提供见得curd方法
+ * 实体类和数据库表映射简单实现，并提供简单的curd方法
  * @param <T> 实体类泛型
  */
 public abstract class BaseMapper<T> {
     private Class<T> clazz;
     private Connection conn = null;
     {
-        //获取当前BaseDAO的子类继承的父类中的泛型
+        //获取当前BaseMapper的子类继承的父类中的泛型
         Type genericSuperclass = this.getClass().getGenericSuperclass();
         ParameterizedType paramType = (ParameterizedType) genericSuperclass;
 
@@ -203,9 +203,5 @@ public abstract class BaseMapper<T> {
             JDBCUtils.closeResource(conn, null, rs);
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-
     }
 }

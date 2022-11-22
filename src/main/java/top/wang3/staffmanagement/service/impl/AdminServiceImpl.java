@@ -11,11 +11,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin getAdminByName(String name) {
-        try {
-            Thread.sleep(1100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return adminMapper.selectAdminByName(name);
     }
 }

@@ -91,7 +91,6 @@ public class LoginFrame extends JFrame {
     }
 
     private void handleLogin() {
-        System.out.println(inLoginProgress);
         if (inLoginProgress) {
             return;
         }
@@ -105,10 +104,10 @@ public class LoginFrame extends JFrame {
                     //if success, not need to reset inLoinProgress
                     successLogin();
                 } else {
-                    inLoginProgress = false;
                     //modal
                     JOptionPane.showMessageDialog(this, "管理员账号或密码错误", "错误",
                             JOptionPane.ERROR_MESSAGE);
+                    inLoginProgress = false;
                 }
             });
         } catch (Exception e) {

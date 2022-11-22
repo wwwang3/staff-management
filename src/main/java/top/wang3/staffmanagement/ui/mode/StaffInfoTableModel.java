@@ -10,13 +10,11 @@ import java.util.Vector;
 public class StaffInfoTableModel extends DefaultTableModel {
 
     private StaffInfoTableModel() {
-        super();
     }
 
     public StaffInfoTableModel(Vector<? extends Vector> data, String[] columnNames) {
-       super(data, convertToVector(columnNames));
+        super(data, convertToVector(columnNames));
     }
-
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -46,6 +44,11 @@ public class StaffInfoTableModel extends DefaultTableModel {
         return false;
     }
 
+    /**
+     * 根据表头的名称，获取表头所在的索引
+     * @param header
+     * @return
+     */
     public int getHeaderIndex(String header) {
         for (int i = 0; i < getColumnCount(); i++) {
             if (getColumnName(i).equals(header)) {

@@ -129,6 +129,7 @@ public class EditStaffFrame extends JDialog {
     }
 
     private EditStaffFrame setData(Vector<Object> initData) {
+        //设置初始数据
         if (initData == null || initData.size() < 8) {
             throw new IllegalArgumentException("参数错误");
         }
@@ -158,6 +159,7 @@ public class EditStaffFrame extends JDialog {
     }
 
     private void preCheck() throws IllegalArgumentException {
+        //检查个字段是否合法(just simple check)
         String name = this.name.getText().trim();
         if (name == null || name.isBlank()) {
             throw new IllegalStateException("姓名不能为空");
@@ -178,13 +180,6 @@ public class EditStaffFrame extends JDialog {
         if (!checkSalary(salary)) {
             throw new IllegalStateException("薪资非法");
         }
-    }
-
-    private boolean checkSex(String d) {
-        if ("男".equals(d) || "女".equals(d)) {
-            return true;
-        }
-        return false;
     }
 
     private boolean checkPhone(String d) {
