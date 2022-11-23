@@ -35,4 +35,4 @@ application.yml
 application-mail.yml
 mail.yml
 target\
-/src/main/resources/mysql.properties
+#/src/main/resources/mysql.properties

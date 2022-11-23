@@ -18,7 +18,7 @@ public class StaffInfoTableModel extends DefaultTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        //in to better sort
+        //in order to better sort
         Class<?> clazz;
         if (columnIndex >= 0 && columnIndex < getColumnCount()) {
             clazz = getValueAt(0, columnIndex).getClass();

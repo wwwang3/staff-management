@@ -8,8 +8,15 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+/**
+ * 组件工具类
+ */
 public class ComponentUtils {
 
+    /**
+     * 占位组件，布局不太会，简单直接用占位组件了
+     * @return JComponent
+     */
     public static JComponent getGapC() {
         JPanel gap = new JPanel();
         gap.setPreferredSize(new Dimension(250, 20));
@@ -48,6 +55,11 @@ public class ComponentUtils {
         return field;
     }
 
+    /**
+     * 标签组件 w-72 h-36
+     * @param l 标签名称
+     * @return JLabel
+     */
     public static JLabel getLabel(String l) {
         return getLabel(l, 72, 36);
     }
@@ -84,6 +96,9 @@ public class ComponentUtils {
         return b;
     }
 
+    /**
+     * 使输入框带有默认占位文字的监听器
+     */
     static class TextFieldFocusListener implements FocusListener {
 
         private final String placeholder;

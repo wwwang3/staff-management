@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 22/11/2022 19:27:34
+ Date: 23/11/2022 14:09:51
 */
 
 SET NAMES utf8mb4;
@@ -47,15 +47,16 @@ CREATE TABLE `t_staff`  (
   `hire_time` date NOT NULL COMMENT '雇佣日期',
   `salary` double(10, 2) NOT NULL COMMENT '月薪',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_as_cs ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1010 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_as_cs ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_staff
 -- ----------------------------
-INSERT INTO `t_staff` VALUES (1000, 'wang', '女', '董事会', '13762203152', '1990-02-15', '2022-11-20', 2000.00);
+INSERT INTO `t_staff` VALUES (1000, 'wang', '男', '董事会', '13762203152', '1990-02-15', '2022-11-20', 2000.00);
 INSERT INTO `t_staff` VALUES (1001, 'wang2', '女', 'NASA', '13762203152', '1999-01-02', '2022-11-20', 400.00);
 INSERT INTO `t_staff` VALUES (1002, '张三', '男', 'NASA', '13762203152', '1999-02-19', '2022-11-19', 500.00);
 INSERT INTO `t_staff` VALUES (1007, '王五', '女', 'FBI', '13762203152', '2000-10-28', '2022-11-22', 500.00);
 INSERT INTO `t_staff` VALUES (1008, '赵六', '男', 'FBI', '13973279129', '2000-10-20', '2022-11-21', 5000.00);
+INSERT INTO `t_staff` VALUES (1009, 'wang5', '女', 'FBI', '13675689542', '1999-10-28', '2022-11-22', 6000.00);
 
 SET FOREIGN_KEY_CHECKS = 1;
